@@ -1,0 +1,7 @@
+baseURL = "https://zeringue.io/"
+languageCode = "en-us"
+title = "John Zeringue"
+theme = "after-dark"
+
+[params]
+  powered_by = false
