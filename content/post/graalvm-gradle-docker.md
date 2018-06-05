@@ -45,7 +45,8 @@ public class App {
 
 Now comes my only hack in this post. GraalVM won't like that we don't have any
 resources later on, so create an empty file called `dummy.txt` in
-`src/main/resources`.
+`src/main/resources`. In a more substantial project, you'd likely have some
+resources anyways and wouldn't need this file.
 
 If you run `./gradlew run` now, you've got a web server. Awesome! Time to make
 a native image out of it.
