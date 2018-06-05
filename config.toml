@@ -3,5 +3,8 @@ languageCode = "en-us"
 title = "John Zeringue"
 theme = "after-dark"
 
+[blackfriday]
+  hrefTargetBlank = true
+
 [params]
   powered_by = false
