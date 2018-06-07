@@ -17,9 +17,9 @@ the command line, and run `gradle init --type java-application`, which will
 generate a project skeleton suitable for this example. Now you can
 run the application with `./gradlew run` and get a nice greeting back.
 
-Next, we'll flesh out the web server. I chose [Spark][], so we need to add it to our
-project dependencies. Edit the dependencies block in your `build.gradle` file to look
-like this:
+Next, we'll flesh out the web server. I'm choosing [Spark][] for the web framework, so
+we need to add it to our project dependencies. Edit the dependencies block in
+your `build.gradle` file to look like this:
     {{< highlight groovy >}}
 dependencies {
     compile 'com.sparkjava:spark-core:2.7.2'
