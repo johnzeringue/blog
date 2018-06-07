@@ -95,7 +95,7 @@ binary using the Gradle task we set up earlier, and the second block copies
 it into a clean Docker image without the build tools. It's not especially fast,
 so get comfortable and run `docker build -t graalvm-demo .`
 
-Once it finishes, we're all done! On my machine, the native binary weighed in at
+Once it finishes, we're all done! On my machine, the native binary weighs in at
 14 MB, and the whole Docker image is just 19 MB uncompressed. By comparison, the
 `openjdk` image is 450 MB *without any* application code.
 
@@ -105,7 +105,7 @@ http://localhost:4567/hello in a browser, you should see "Hello World".
 Takeaways
 ---------
 
-I'm surprised how easy it is to integrate GraalVM and Gradle. As long as you're
+I'm surprised by how easy it is to integrate GraalVM and Gradle. As long as you're
 only targeting Docker/Linux, this is something Java developers should already
 consider using for projects.
 
@@ -116,7 +116,7 @@ eventually we'll even be able to use reflection-intensive web frameworks like
 Jersey and Spring.
 
 Native binaries could be a huge feature for Java, putting it in direct
-competition with Golang. Java has been so successful on the server that it's
+competition with Golang. Java is so successful on the server that it's
 exciting to imagine the possibilities for CLIs and smaller distributions.
 
 [GraalVM]: https://www.graalvm.org/
