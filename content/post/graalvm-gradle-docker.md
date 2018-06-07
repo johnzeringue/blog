@@ -1,24 +1,23 @@
 ---
-title: "Small Static Java Web Servers with GraalVM and Gradle"
+title: "Java Web Server in a 20 MB Docker Image"
 date: 2018-06-04T20:11:50-04:00
 ---
 
-[GraalVM][] is a new virtual machine from Oracle that supports several popular
-programming languages including JavaScript, Python, Ruby, and Java. One exciting
-feature of GraalVM is the ability to create native binaries from JVM binaries.
-These native binaries promise improved size, speed, startup time, and operational
-overhead compared to the typical Java runtime.
+[GraalVM][] is a new virtual machine from Oracle with a lot of cool features. One
+of the most exciting is the ability to create native Java binaries.
+These native binaries promise improved speed, size, startup time, and operational
+overhead compared to a typical JVM runtime.
 
-In this blog post, I show how to create a native binary for a basic web server
-written using [Spark][], a popular Java microframework. At the end, we'll
-have a nicely scripted build that you *might* consider using for serious projects.
+In this blog post, I show how to create a tiny Docker image with a simple web server
+by using native Java binaries. At the end, we'll have a nicely scripted build that
+you *might* consider using for serious projects.
 
 After installing Gradle on your own, create a new directory, navigate to it from
 the command line, and run `gradle init --type java-application`, which will
-generate a project skeleton suitable for this example. Now you should be able to
-run `./gradlew run` and get a nice greeting back.
+generate a project skeleton suitable for this example. Now you can
+run the application with `./gradlew run` and get a nice greeting back.
 
-Next we'll flesh out the web application. First, we'll need to add Spark to our
+Next, we'll flesh out the web server. I chose [Spark][], so we need to add it to our
 project dependencies. Edit the dependencies block in your `build.gradle` file to look
 like this:
     {{< highlight groovy >}}
@@ -85,7 +84,7 @@ WORKDIR /graalvm-demo
 COPY . /graalvm-demo
 RUN ./gradlew nativeImage
 
-FROM ubuntu:18.04
+FROM alpine
 WORKDIR /graalvm-demo
 COPY --from=0 /graalvm-demo/app .
 EXPOSE 4567
@@ -103,20 +102,20 @@ Once it finishes, we're all done! On my machine, the native binary weighed in at
 Run `docker run -p 4567:4567 graalvm-demo` to start the server. If you open
 http://localhost:4567/hello in a browser, you should see "Hello World".
 
-Conclusions
------------
+Takeaways
+---------
 
-I'm surprised how it is to integrate GraalVM and Gradle. The
-result is something you wouldn't be that crazy to start using for a serious
-project, as long as you're only targeting Linux.
+I'm surprised how easy it is to integrate GraalVM and Gradle. As long as you're
+only targeting Docker/Linux, this is something Java developers should already
+consider using for projects.
 
-The biggest downside to native binaries right now is that
+The biggest downside to the native binaries right now is that
 [they don't support reflection well](https://github.com/oracle/graal/blob/master/substratevm/REFLECTION.md).
 However, I'm confident that support and tooling will improve, and that
 eventually we'll even be able to use reflection-intensive web frameworks like
 Jersey and Spring.
 
-Native binaries could be a big feature for Java, putting it in direct
+Native binaries could be a huge feature for Java, putting it in direct
 competition with Golang. Java has been so successful on the server that it's
 exciting to imagine the possibilities for CLIs and smaller distributions.
 
